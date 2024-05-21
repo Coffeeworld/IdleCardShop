@@ -7,7 +7,9 @@ func _ready():
 	updateCardDictionary()
 	print("Complete Card Dictionary")
 	print("----------------------")
-	print(complete_card_dictionary)
+	for collection_name in complete_card_dictionary:
+		for card_number in complete_card_dictionary[collection_name]:
+			print(collection_name, ": ", card_number)
 	print("----------------------")
 	print("End of Complete Card Dictionary")
 

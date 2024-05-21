@@ -5,7 +5,6 @@ var game_file_name: String
 
 func _ready():
 	verify_save_directory(save_file_path)
-	SignalManager.save_requested.connect(save)
 
 func verify_save_directory(path: String):
 	DirAccess.make_dir_absolute(path)

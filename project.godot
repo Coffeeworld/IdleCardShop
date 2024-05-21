@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 CardData="*res://globals/CardData.gd"
 SaveManager="*res://globals/SaveManager.gd"
 SignalManager="*res://globals/SignalManager.gd"
+GameManager="*res://globals/GameManager.gd"
 
 [rendering]
 

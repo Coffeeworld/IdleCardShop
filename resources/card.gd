@@ -15,6 +15,7 @@ class_name Card
 @export var flavor_text: String = 'Flavor Text'
 @export var text: String = 'Card Text'
 @export var type: Type = Type.CHARACTER
+@export var subtypes: Array[String] = []
 @export var image: CompressedTexture2D = null
 
 enum Quality {
@@ -94,3 +95,6 @@ func generateCard(set_name: String, card_type: String) -> Card:
 	for card in candidate_cards:
 		totalCandidateWeight += card.weight
 	return newCard
+
+func getCardTypeAsString(card: Card) -> String:
+	return Type.keys()[card.type].capitalize()
