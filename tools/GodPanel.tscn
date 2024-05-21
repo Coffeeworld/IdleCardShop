@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://dw8o5ff8aht3u"]
+
+[ext_resource type="Theme" uid="uid://d0kvedaf1dlpf" path="res://themes/default.tres" id="1_lrc3t"]
+
+[node name="GodPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_lrc3t")
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 15
+columns = 4
+
+[node name="WipeInventory" type="Button" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Wipe Inventory"
+
+[node name="AddCardsToCollection" type="Button" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Add Cards to Collection"
+
+[node name="AddPacksToCollection" type="Button" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Add Packs to Collection"
+
+[node name="AddBoxesToCollection" type="Button" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Add Boxes to Collection"
