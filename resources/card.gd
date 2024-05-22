@@ -87,13 +87,28 @@ func generateCard(set_name: String, card_type: String) -> Card:
 	newCard.set = set_name
 	newCard.type = card_type
 	var candidate_cards = CardData.getCardsInSetOfType(set_name, card_type)
+	if candidate_cards.size() == 0:
+		print("No cards found for set " + set_name + " and type " + card_type)
+		return null
+	var random_number = randi() % candidate_cards.size()
 	print("The following cards are candidates for generation:")
+	var cumulative_weight = 0
 	for card in candidate_cards:
-		print(card.name)
+		print("Current card: " + card.name)
+		cumulative_weight += card.weight
+		if random_number <= cumulative_weight:
+			print("Selected card: " + card.name)
+			newCard.name = card.name
+			newCard.flavor_text = card.flavor_text
+			newCard.text = card.text
+			newCard.subtypes = card.subtypes
+			newCard.image = card.image
+			newCard.rarity = Rarity.keys()[card.rarity]
+			newCard.quality = Quality.keys()[card.quality]
+			newCard.surface_finish = SurfaceFinish.keys()[card.surface_finish]
+			newCard.number = card.number
+			break
 	print("-------------------")
-	var totalCandidateWeight = 0
-	for card in candidate_cards:
-		totalCandidateWeight += card.weight
 	return newCard
 
 func getCardTypeAsString(card: Card) -> String:

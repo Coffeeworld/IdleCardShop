@@ -13,3 +13,4 @@ name = "Card Name"
 flavor_text = "Flavor Text"
 text = "Card Text"
 type = 2
+subtypes = Array[String]([])

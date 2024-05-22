@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://d0uonknk7q345"]
 
-[ext_resource type="Script" path="res://scenes/card_scene.gd" id="1_0c6js"]
+[ext_resource type="Script" path="res://scenes/card_ui.gd" id="1_0c6js"]
 [ext_resource type="Theme" uid="uid://d0kvedaf1dlpf" path="res://themes/default.tres" id="1_n7gm0"]
 [ext_resource type="Texture2D" uid="uid://b6u6to51bkquj" path="res://assets/card_art/shadowcat-fae.jpg" id="3_5uup3"]
 

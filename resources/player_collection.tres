@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PlayerCollection" load_steps=2 format=3 uid="uid://cyvjlbc86rxbj"]
+
+[ext_resource type="Script" path="res://resources/player_collection.gd" id="1_dm0nn"]
+
+[resource]
+script = ExtResource("1_dm0nn")
+player_card_collection = []
+player_pack_collection = []
+player_box_collection = []

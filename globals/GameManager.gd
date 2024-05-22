@@ -1,7 +1,7 @@
 extends Node
 
-var player_collection_dict = {}
-var player_collection = PlayerCollection.new()
+var player_collection : PlayerCollection
 
 func _ready():
-	player_collection_dict = player_collection.getPlayerCollection()
+	player_collection = PlayerCollection.new()
+	print(player_collection)

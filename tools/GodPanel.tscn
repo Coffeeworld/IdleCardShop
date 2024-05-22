@@ -13,33 +13,51 @@ grow_vertical = 2
 script = ExtResource("1_1pme7")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_lrc3t")
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 15
-columns = 4
+columns = 2
 
-[node name="WipeInventory" type="Button" parent="MarginContainer/GridContainer"]
+[node name="WipeInventory" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Wipe Inventory"
 
-[node name="AddCardsToCollection" type="Button" parent="MarginContainer/GridContainer"]
+[node name="AddCardToCollection" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
-text = "Add Cards to Collection"
+text = "Add Card to Collection"
 
-[node name="AddPacksToCollection" type="Button" parent="MarginContainer/GridContainer"]
+[node name="AddPackToCollection" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
-text = "Add Packs to Collection"
+text = "Add Pack to Collection"
 
-[node name="AddBoxesToCollection" type="Button" parent="MarginContainer/GridContainer"]
+[node name="AddBoxToCollection" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
-text = "Add Boxes to Collection"
+text = "Add Box to Collection"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="CreatedItem" type="CenterContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/AddCardToCollection" to="." method="_on_add_cards_to_collection_pressed"]
