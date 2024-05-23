@@ -83,33 +83,55 @@ func getRarityColor(rarity: String) -> Color:
 		return Color(0, 0, 0) # Default color if rarity is not found
 
 func generateCard(set_name: String, card_type: String) -> Card:
-	var newCard = Card.new()
-	newCard.set = set_name
-	newCard.type = card_type
+	var new_card = Card.new()
+	new_card.set = set_name
+	new_card.type = card_type
 	var candidate_cards = CardData.getCardsInSetOfType(set_name, card_type)
 	if candidate_cards.size() == 0:
 		print("No cards found for set " + set_name + " and type " + card_type)
 		return null
-	var random_number = randi() % candidate_cards.size()
+	var total_weight = getTotalWeightofCandidates(candidate_cards)
+	var random_number = randi() % total_weight
+	print(random_number)
 	print("The following cards are candidates for generation:")
 	var cumulative_weight = 0
-	for card in candidate_cards:
-		print("Current card: " + card.name)
+	for card_key in candidate_cards:
+		var card = candidate_cards[card_key]
+		print("Current card: " + card.card_name)
 		cumulative_weight += card.weight
+		print("cumulative weight: " + str(cumulative_weight))
 		if random_number <= cumulative_weight:
-			print("Selected card: " + card.name)
-			newCard.name = card.name
-			newCard.flavor_text = card.flavor_text
-			newCard.text = card.text
-			newCard.subtypes = card.subtypes
-			newCard.image = card.image
-			newCard.rarity = Rarity.keys()[card.rarity]
-			newCard.quality = Quality.keys()[card.quality]
-			newCard.surface_finish = SurfaceFinish.keys()[card.surface_finish]
-			newCard.number = card.number
+			print("Selected card: " + card.card_name)
+			print(card)
+			new_card.name = card.card_name
+			new_card.flavor_text = card.flavor
+			if card.has("text") and card.text:
+				new_card.text = card.text
+			if card.has("subtypes") and card.subtypes:
+				print(card.subtypes)
+				for subtype in new_card.subtypes:
+					new_card.subtypes.append(subtype.strip())
+			if card.has("image") and card.image:
+				new_card.image = card.image
+			new_card.rarity = card.rarity
+			new_card.quality = randi() % Quality.size()
+			if randf() < 0.07:
+				new_card.surface_finish = SurfaceFinish.FOIL
+			else:
+				new_card.surface_finish = SurfaceFinish.STANDARD
+			new_card.number = card_key
+			GameManager.player_collection.addCardToCollection(new_card)
+			print(GameManager.player_collection.getPlayerCollection())
+			ResourceSaver.save(new_card, "user://" + new_card.name + ".tres")
 			break
 	print("-------------------")
-	return newCard
+	return new_card
 
 func getCardTypeAsString(card: Card) -> String:
 	return Type.keys()[card.type].capitalize()
+
+func getTotalWeightofCandidates(candidate_cards: Dictionary) -> int:
+	var total_weight = 0
+	for card_key in candidate_cards:
+		total_weight += candidate_cards[card_key].weight
+	return total_weight

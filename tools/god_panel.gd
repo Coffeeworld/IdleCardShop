@@ -12,4 +12,4 @@ func _process(delta):
 
 
 func _on_add_cards_to_collection_pressed():
-	var new_card = Card.new().generate_card()
+	var new_card = Card.new().generateCard("Dustborn", "Character")

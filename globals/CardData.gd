@@ -50,8 +50,9 @@ func getCardsInSetOfType(card_set: String, card_type: String) -> Dictionary:
 	if card_set in complete_card_dictionary:
 		for card_number in complete_card_dictionary[card_set]:
 			var card_data = complete_card_dictionary[card_set][card_number]
-			if card_data["type"] == card_type:
-				cards[card_number] = (card_data)
+			if card_data != {}:
+				if card_data["card_type"] == card_type:
+					cards[card_number] = card_data
 			else:
-				print("Unable to locate cards in set " + card_set + " of type " + card_type)
+				print("Card data is null")
 	return cards
