@@ -32,6 +32,8 @@ color_ramp = SubResource("Gradient_dxqgn")
 noise = SubResource("FastNoiseLite_m0vax")
 
 [node name="Card" type="Control"]
+z_index = 100
+custom_minimum_size = Vector2(125, 175)
 layout_mode = 3
 anchor_right = 0.217
 anchor_bottom = 0.54

@@ -127,6 +127,8 @@ func generate_card(card_set_name: String, card_type: String) -> Card:
 	print("-------------------")
 	return new_card
 
+#TODO: Implement a function to generate a card based on a specific card key
+
 func get_card_type_as_string(card: Card) -> String:
 	return Type.keys()[card.type].capitalize()
 

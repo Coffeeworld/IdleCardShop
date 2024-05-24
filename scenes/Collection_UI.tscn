@@ -4,16 +4,20 @@
 [ext_resource type="Script" path="res://scenes/collection_ui.gd" id="1_uo3ig"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sul4u"]
+content_margin_left = 5.0
+content_margin_top = 20.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
 bg_color = Color(0.0862745, 0.0117647, 0.180392, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0.901961, 1, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="CollectionUi" type="Control"]
 layout_mode = 3
@@ -36,17 +40,23 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_sul4u")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="Title" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Player Collection"
 
 [node name="TabContainer" type="TabContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="CardCollection" type="GridContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 500)
 layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
 
 [node name="PackCollection" type="GridContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
 unique_name_in_owner = true

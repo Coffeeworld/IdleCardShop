@@ -1,10 +1,10 @@
 <component name="libraryTable">
   <library name="GdSdk 4.2.1" type="GdScript">
-    <properties path="$USER_HOME$/Library/Caches/JetBrains/Rider2024.1/projects/.idea.idlecardshop.dir.7ab84aa3/sdk/GdSdk 4.2.1" version="4.2.1" date="2024-02-26T18:31:12.000+01:00" />
+    <properties path="C:\Users\ryanc\AppData\Local\JetBrains\Rider2024.1\projects\.idea.idlecardshop.dir.d02bd044\sdk\GdSdk 4.2.1" version="4.2.1" date="2024-02-26T18:31:12.000+01:00" />
     <CLASSES />
     <JAVADOC />
     <SOURCES>
-      <root url="file://$USER_HOME$/Library/Caches/JetBrains/Rider2024.1/projects/.idea.idlecardshop.dir.7ab84aa3/sdk/GdSdk 4.2.1" />
+      <root url="file://$USER_HOME$/AppData/Local/JetBrains/Rider2024.1/projects/.idea.idlecardshop.dir.d02bd044/sdk/GdSdk 4.2.1" />
     </SOURCES>
   </library>
 </component>
