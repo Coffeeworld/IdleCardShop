@@ -4,7 +4,7 @@ var card_data_file_path = "res://data/Cards.json"
 var complete_card_dictionary = {}
 
 func _ready():
-	updateCardDictionary()
+	update_card_dictionary()
 	print("Complete Card Dictionary")
 	print("----------------------")
 	for collection_name in complete_card_dictionary:
@@ -13,7 +13,7 @@ func _ready():
 	print("----------------------")
 	print("End of Complete Card Dictionary")
 
-func updateCardDictionary():
+func update_card_dictionary():
 	if FileAccess.file_exists(card_data_file_path):
 		var file = FileAccess.open(card_data_file_path, FileAccess.READ)
 		var parsed_file = JSON.parse_string(file.get_as_text())
@@ -25,7 +25,7 @@ func updateCardDictionary():
 	else:
 		print("Card data file not found")
 
-func getCardData(card_set_name: String, card_number: int) -> Dictionary:
+func get_card_data(card_set_name: String, card_number: int) -> Dictionary:
 	var card_data = {}
 	if card_set_name in complete_card_dictionary:
 		if card_number in complete_card_dictionary[card_set_name]:
@@ -36,7 +36,7 @@ func getCardData(card_set_name: String, card_number: int) -> Dictionary:
 		print("Card set not found")
 	return card_data
 
-func getSetSize(card_set_name: String) -> int:
+func get_set_size(card_set_name: String) -> int:
 	var card_set_size = 0
 	if card_set_name in complete_card_dictionary:
 		card_set_size = complete_card_dictionary[card_set_name].size()
@@ -45,7 +45,7 @@ func getSetSize(card_set_name: String) -> int:
 		print("Unable to return set size: card set not found")
 	return card_set_size
 
-func getCardsInSetOfType(card_set_name: String, card_type: String) -> Dictionary:
+func get_cards_in_set_of_type(card_set_name: String, card_type: String) -> Dictionary:
 	var cards: Dictionary = {}
 	if card_set_name in complete_card_dictionary:
 		for card_number in complete_card_dictionary[card_set_name]:

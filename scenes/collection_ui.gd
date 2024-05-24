@@ -7,9 +7,9 @@ var player_pack_collection
 var player_box_collection
 
 func _ready():
-	player_card_collection = player_collection.getPlayerCollection()["card_collection"]
-	player_pack_collection = player_collection.getPlayerCollection()["pack_collection"]
-	player_box_collection = player_collection.getPlayerCollection()["box_collection"]
+	player_card_collection = player_collection.player_card_collection
+	player_pack_collection = player_collection.player_pack_collection
+	player_box_collection = player_collection.player_box_collection
 	
 	# Load the collection
 	load_collection()

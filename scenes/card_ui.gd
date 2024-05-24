@@ -2,14 +2,14 @@ extends Control
 
 @export var card: Card
 
-func setCard(card: Card):
+func set_card(card: Card):
 	self.card = card
-	updateCard()
+	update_card()
 
-func updateCard():
+func update_card():
 	print(card)
 	%Name.text = card.name
-	%Type.text = card.getCardTypeAsString(card)
+	%Type.text = card.get_card_type_as_string(card)
 	%Subtypes.text = card.subtypes
 	%Set.text = card.card_set_name
 	%Flavor.text = card.flavor_text

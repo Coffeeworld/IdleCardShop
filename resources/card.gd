@@ -75,22 +75,22 @@ enum Type {
 
 #TODO functions to get enums as strings and vice versa (use capitalize to make enum Camel)
 
-func getRarityColor(rarity: String) -> Color:
+func get_rarity_color(rarity: String) -> Color:
 	var rarityIndex = Rarity[rarity]
 	if rarityIndex != - 1:
 		return RARITY_COLORS[rarityIndex]
 	else:
 		return Color(0, 0, 0) # Default color if rarity is not found
 
-func generateCard(card_set_name: String, card_type: String) -> Card:
+func generate_card(card_set_name: String, card_type: String) -> Card:
 	var new_card = Card.new()
 	new_card.card_set_name = card_set_name
 	new_card.type = card_type
-	var candidate_cards = CardData.getCardsInSetOfType(card_set_name, card_type)
+	var candidate_cards = CardData.get_cards_in_set_of_type(card_set_name, card_type)
 	if candidate_cards.size() == 0:
 		print("No cards found for set " + card_set_name + " and type " + card_type)
 		return null
-	var total_weight = getTotalWeightofCandidates(candidate_cards)
+	var total_weight = get_total_weight_of_candidates(candidate_cards)
 	var random_number = randi() % total_weight
 	print(random_number)
 	print("The following cards are candidates for generation:")
@@ -120,17 +120,17 @@ func generateCard(card_set_name: String, card_type: String) -> Card:
 			else:
 				new_card.surface_finish = SurfaceFinish.STANDARD
 			new_card.number = card_key
-			GameManager.player_collection.addCardToCollection(new_card)
-			print(GameManager.player_collection.getPlayerCollection())
+			GameManager.player_collection.add_card_to_collection(new_card)
+			print(GameManager.player_collection.get_player_collection())
 			#print(GameManager.player_collection.getPlayerCollection())
 			break
 	print("-------------------")
 	return new_card
 
-func getCardTypeAsString(card: Card) -> String:
+func get_card_type_as_string(card: Card) -> String:
 	return Type.keys()[card.type].capitalize()
 
-func getTotalWeightofCandidates(candidate_cards: Dictionary) -> int:
+func get_total_weight_of_candidates(candidate_cards: Dictionary) -> int:
 	var total_weight = 0
 	for card_key in candidate_cards:
 		total_weight += candidate_cards[card_key].weight

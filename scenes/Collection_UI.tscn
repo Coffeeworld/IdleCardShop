@@ -5,10 +5,10 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sul4u"]
 bg_color = Color(0.0862745, 0.0117647, 0.180392, 1)
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 border_color = Color(0, 0.901961, 1, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20

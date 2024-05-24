@@ -6,35 +6,35 @@ class_name PlayerCollection
 @export var player_pack_collection = []
 @export var player_box_collection = []
 
-func clearCollections():
+func clear_collections():
 	player_card_collection.clear()
 	player_pack_collection.clear()
 	player_box_collection.clear()
-	SaveManager.savePlayerCollectionAsResource(GameManager.player_collection)
+	SaveManager.save_player_collection_as_resource(GameManager.player_collection)
 
-func getPlayerCollection() -> Dictionary:
+func get_player_collection() -> Dictionary:
 	return {
 		"card_collection": player_card_collection,
 		"pack_collection": player_pack_collection,
 		"box_collection": player_box_collection
 	}
 
-func addCardToCollection(card: Card):
+func add_card_to_collection(card: Card):
 	player_card_collection.append(card)
-	GameManager.saveGame()
+	GameManager.save_game()
 
-func addPackToCollection(pack: Pack):
+func add_pack_to_collection(pack: Pack):
 	player_pack_collection.append(pack)
 
-func addBoxToCollection(box: Box):
+func add_box_to_collection(box: Box):
 	player_box_collection.append(box)
 
-func removeCardFromCollection(card: Card):
+func remove_card_from_collection(card: Card):
 	player_card_collection.remove(card)
 
-func removePackFromCollection(pack: Pack):
+func remove_pack_from_collection(pack: Pack):
 	player_pack_collection.remove(pack)
 
-func removeBoxFromCollection(box: Box):
+func remove_box_from_collection(box: Box):
 	player_box_collection.remove(box)
 	
