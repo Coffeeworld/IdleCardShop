@@ -32,13 +32,16 @@ color_ramp = SubResource("Gradient_dxqgn")
 noise = SubResource("FastNoiseLite_m0vax")
 
 [node name="Card" type="Control"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
 layout_mode = 3
 anchor_right = 0.217
 anchor_bottom = 0.54
-offset_right = 0.0159912
-offset_bottom = 0.0799866
+offset_right = 0.015976
+offset_bottom = 0.0799861
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("1_n7gm0")
 script = ExtResource("1_0c6js")
 

@@ -10,7 +10,7 @@ func update_card():
 	print(card)
 	%Name.text = card.name
 	%Type.text = card.get_card_type_as_string(card)
-	%Subtypes.text = card.subtypes
+	%Subtypes.text = str(card.subtypes)
 	%Set.text = card.card_set_name
 	%Flavor.text = card.flavor_text
 	%Text.text = card.text

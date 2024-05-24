@@ -4,6 +4,10 @@
 [ext_resource type="Script" path="res://scenes/collection_ui.gd" id="1_uo3ig"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sul4u"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
 bg_color = Color(0.0862745, 0.0117647, 0.180392, 1)
 border_width_left = 2
 border_width_top = 2
@@ -39,14 +43,19 @@ layout_mode = 2
 
 [node name="Title" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Player Collection"
 
 [node name="TabContainer" type="TabContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="CardCollection" type="GridContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 5
 
 [node name="PackCollection" type="GridContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
 unique_name_in_owner = true
