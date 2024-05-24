@@ -4,15 +4,18 @@ var save_file_path = "user://save/"
 var game_file_name: String
 
 func _ready():
-	verify_save_directory(save_file_path)
-
-func verify_save_directory(path: String):
-	DirAccess.make_dir_absolute(path)
-
-func get_all_save_files():
-	return DirAccess.open(save_file_path).get_files()
-
-func save_game(save_name):
-	var save_file = save_name + ".tres"
-	var save_game_file = FileAccess.open(save_file_path + save_file, FileAccess.WRITE)
+	pass
 	
+func savePlayerCollectionAsResource(player_collection: PlayerCollection):
+	game_file_name = player_collection.game_name
+	ResourceSaver.save(player_collection, save_file_path + game_file_name + ".tres")
+
+func loadOrCreatePlayerCollection(game_name: String) -> PlayerCollection:
+	game_file_name = game_name
+	var player_collection = ResourceLoader.load(save_file_path + game_file_name + ".tres")
+	print(player_collection.getPlayerCollection())
+	if player_collection == null:
+		player_collection = PlayerCollection.new()
+		player_collection.game_name = game_name
+		ResourceSaver.save(player_collection, save_file_path + game_file_name + ".tres")
+	return player_collection

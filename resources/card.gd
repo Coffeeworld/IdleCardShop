@@ -2,7 +2,7 @@ extends Resource
 class_name Card
 
 @export_group("Core Identifiers")
-@export var set: String = 'Test Set'
+@export var card_set_name: String = 'Test Set'
 @export var number: int = 0
 
 @export_group("Variable Instance Attributes")
@@ -82,13 +82,13 @@ func getRarityColor(rarity: String) -> Color:
 	else:
 		return Color(0, 0, 0) # Default color if rarity is not found
 
-func generateCard(set_name: String, card_type: String) -> Card:
+func generateCard(card_set_name: String, card_type: String) -> Card:
 	var new_card = Card.new()
-	new_card.set = set_name
+	new_card.card_set_name = card_set_name
 	new_card.type = card_type
-	var candidate_cards = CardData.getCardsInSetOfType(set_name, card_type)
+	var candidate_cards = CardData.getCardsInSetOfType(card_set_name, card_type)
 	if candidate_cards.size() == 0:
-		print("No cards found for set " + set_name + " and type " + card_type)
+		print("No cards found for set " + card_set_name + " and type " + card_type)
 		return null
 	var total_weight = getTotalWeightofCandidates(candidate_cards)
 	var random_number = randi() % total_weight
@@ -122,7 +122,7 @@ func generateCard(set_name: String, card_type: String) -> Card:
 			new_card.number = card_key
 			GameManager.player_collection.addCardToCollection(new_card)
 			print(GameManager.player_collection.getPlayerCollection())
-			ResourceSaver.save(new_card, "user://" + new_card.name + ".tres")
+			#print(GameManager.player_collection.getPlayerCollection())
 			break
 	print("-------------------")
 	return new_card

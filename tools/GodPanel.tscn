@@ -60,4 +60,5 @@ theme_override_constants/margin_bottom = 20
 [node name="CreatedItem" type="CenterContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
+[connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/WipeInventory" to="." method="_on_wipe_inventory_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/AddCardToCollection" to="." method="_on_add_cards_to_collection_pressed"]
