@@ -1,12 +1,13 @@
 extends Control
 class_name CollectionDialogue
 
-@onready var player_collection = GameManager.player_collection
+var player_collection : PlayerCollection
 var player_card_collection
 var player_pack_collection
 var player_box_collection
 
 func _ready():
+	player_collection = GameManager.player_collection
 	player_card_collection = player_collection.player_card_collection
 	player_pack_collection = player_collection.player_pack_collection
 	player_box_collection = player_collection.player_box_collection
@@ -23,6 +24,10 @@ func load_collection():
 		var card_instance = load("res://scenes/Card.tscn").instantiate()
 		card_instance.set_card(card)
 		%CardCollection.add_child(card_instance)
+		var card_scene = load("res://scenes/Card.tscn")
+		var card_scene_instance = card_scene.instantiate()
+		%CardCollection.add_child(card_scene_instance)
+		card_scene_instance.set_card(card)
 
 	# Load the pack collection
 	for pack in player_pack_collection:
