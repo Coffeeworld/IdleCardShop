@@ -53,10 +53,10 @@ size_flags_vertical = 3
 
 [node name="CardCollection" type="GridContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(500, 500)
 layout_mode = 2
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
+columns = 8
 
 [node name="PackCollection" type="GridContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
 unique_name_in_owner = true
