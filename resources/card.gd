@@ -6,7 +6,7 @@ class_name Card
 @export var number: int = 0
 
 @export_group("Variable Instance Attributes")
-@export var quality: Quality = Quality.RAGGED
+@export var quality: Quality = Quality.AVERAGE
 @export var surface_finish: SurfaceFinish = SurfaceFinish.STANDARD
 
 @export_group("Derived Attributes")
@@ -43,7 +43,8 @@ enum Rarity {
 	LEGENDARY,
 	MYTHIC,
 	UNIQUE,
-	SPECIAL
+	SPECIAL,
+	MASTERPIECE
 }
 
 static var RARITY_COLORS: Array[Color] = [
@@ -55,7 +56,8 @@ static var RARITY_COLORS: Array[Color] = [
 	Color.ORANGE,
 	Color.RED,
 	Color.PINK,
-	Color.CYAN
+	Color.CYAN,
+	Color.WEB_MAROON
 ]
 
 enum Type {

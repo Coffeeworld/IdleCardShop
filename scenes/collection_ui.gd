@@ -24,10 +24,6 @@ func load_collection():
 		var card_instance = load("res://scenes/Card.tscn").instantiate()
 		card_instance.set_card(card)
 		%CardCollection.add_child(card_instance)
-		var card_scene = load("res://scenes/Card.tscn")
-		var card_scene_instance = card_scene.instantiate()
-		%CardCollection.add_child(card_scene_instance)
-		card_scene_instance.set_card(card)
 
 	# Load the pack collection
 	for pack in player_pack_collection:
