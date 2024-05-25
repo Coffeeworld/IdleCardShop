@@ -12,16 +12,18 @@ func _ready():
 	player_pack_collection = player_collection.player_pack_collection
 	player_box_collection = player_collection.player_box_collection
 	
+	# Set the number of columns
+	var num_columns = get_viewport_rect().size.x / 260
+
 	# Load the collection
 	load_collection()
 
 func load_collection():
 	# Load the card collection
 	for card in player_card_collection:
-		var card_scene = load("res://scenes/Card.tscn")
-		var card_scene_instance = card_scene.instantiate()
-		%CardCollection.add_child(card_scene_instance)
-		card_scene_instance.set_card(card)
+		var card_instance = load("res://scenes/Card.tscn").instantiate()
+		card_instance.set_card(card)
+		%CardCollection.add_child(card_instance)
 
 	# Load the pack collection
 	for pack in player_pack_collection:

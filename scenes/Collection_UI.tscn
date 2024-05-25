@@ -4,10 +4,11 @@
 [ext_resource type="Script" path="res://scenes/collection_ui.gd" id="1_uo3ig"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sul4u"]
-content_margin_left = 5.0
-content_margin_top = 20.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
+
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
 bg_color = Color(0.0862745, 0.0117647, 0.180392, 1)
 border_width_left = 2
 border_width_top = 2
