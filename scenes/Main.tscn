@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://wyux6603wl1u"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_h21sg"]
+[ext_resource type="PackedScene" uid="uid://dw8o5ff8aht3u" path="res://tools/GodPanel.tscn" id="1_ofcfc"]
+[ext_resource type="PackedScene" uid="uid://q42equjtngm5" path="res://scenes/Collection_UI.tscn" id="2_56poa"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h21sg")
+
+[node name="GodPanel" parent="." instance=ExtResource("1_ofcfc")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="CollectionUi" parent="." instance=ExtResource("2_56poa")]
+unique_name_in_owner = true
+layout_mode = 1

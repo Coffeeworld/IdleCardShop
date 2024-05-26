@@ -15,3 +15,4 @@ func update_card():
 	%Flavor.text = card.flavor_text
 	%Text.text = card.text
 	%RarityColor.set_color(Card.RARITY_COLORS[card.rarity])
+	%Color.set_color(Card.SOURCE_COLORS[card.source])

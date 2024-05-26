@@ -26,8 +26,18 @@ enum Quality {
 	MINT
 }
 
-func generate_pack():
-	pass
+func generate_pack(set_name : String, pack_edition : PackEdition):
+	var new_pack = Pack.new()
+	new_pack.set_name = set_name
+	#new_pack.quality = 
+	if pack_edition == PackEdition.MINI:
+		new_pack.pack_size = 5
+	else:
+		new_pack.pack_size = 12
+	GameManager.player_collection.add_pack_to_collection(new_pack)
 
 func open_pack():
+	pass
+
+func custom_pack(cards : Array[Card]):
 	pass

@@ -67,6 +67,20 @@ offset_top = 0.15
 offset_bottom = -0.149994
 theme_override_styles/panel = SubResource("StyleBoxFlat_sqnrt")
 
+[node name="RarityColor" type="ColorRect" parent="InnerPanel"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.942
+anchor_top = 0.561
+anchor_right = 0.983
+anchor_bottom = 0.591
+offset_left = 0.0359955
+offset_top = 0.137985
+offset_right = 0.113983
+offset_bottom = -0.122009
+
 [node name="Color" type="ColorRect" parent="InnerPanel"]
 unique_name_in_owner = true
 layout_mode = 1
@@ -79,19 +93,6 @@ offset_left = -4.114
 offset_top = -4.104
 offset_right = -4.11401
 offset_bottom = -4.10403
-
-[node name="RarityColor" type="ColorRect" parent="InnerPanel"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.942
-anchor_top = 0.561
-anchor_right = 0.983
-anchor_bottom = 0.591
-offset_left = 0.0359955
-offset_top = 0.137985
-offset_right = 0.113983
-offset_bottom = -0.122009
 
 [node name="TextureRect" type="TextureRect" parent="InnerPanel"]
 unique_name_in_owner = true

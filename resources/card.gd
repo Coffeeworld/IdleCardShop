@@ -10,13 +10,18 @@ class_name Card
 @export var surface_finish: SurfaceFinish = SurfaceFinish.STANDARD
 
 @export_group("Derived Attributes")
-@export var rarity: Rarity = Rarity.COMMON
+@export var source: Source = Source.NEUTRAL
+@export var rarity: Rarity = Rarity.MAGIC
 @export var name: String = 'Card Name'
 @export var flavor_text: String = 'Flavor Text'
 @export var text: String = 'Card Text'
 @export var type: Type = Type.CHARACTER
 @export var subtypes: Array[String] = []
 @export var image: CompressedTexture2D = null
+
+@export_group("Source Color")
+@export var source_color : Color
+
 
 enum Quality {
 	RAGGED,
@@ -75,19 +80,53 @@ enum Type {
 	QUEST
 }
 
+enum Edition {
+	STANDARD,
+	FIRST_ED,
+	FULL_ART
+}
+
+enum Source {
+	CELESTIAL,
+	BEGINNING,
+	LIFE,
+	LIGHT,
+	HARMONY,
+	END,
+	DEATH,
+	DARK,
+	CHAOS,
+	TEMPORAL,
+	BALANCE,
+	FATE,
+	TWILIGHT,
+	NEUTRAL
+}
+
+static var SOURCE_COLORS : Array[Color] = [
+	Color.LIGHT_CYAN,
+	Color.LIGHT_PINK,
+	Color.FOREST_GREEN,
+	Color.PALE_GOLDENROD,
+	Color.LIGHT_SKY_BLUE,
+	Color.MIDNIGHT_BLUE,
+	Color.DARK_RED,
+	Color.BLACK,
+	Color.DARK_ORANGE,
+	Color.WHITE,
+	Color.WHITE,
+	Color.WHITE,
+	Color.WHITE,
+	Color.SILVER
+]
+
 #TODO functions to get enums as strings and vice versa (use capitalize to make enum Camel)
 
-func get_rarity_color(rarity: String) -> Color:
-	var rarityIndex = Rarity[rarity]
-	if rarityIndex != - 1:
-		return RARITY_COLORS[rarityIndex]
-	else:
-		return Color(0, 0, 0) # Default color if rarity is not found
 
 func generate_card(card_set_name: String, card_type: String) -> Card:
 	var new_card = Card.new()
 	new_card.card_set_name = card_set_name
-	new_card.type = card_type
+	new_card.type = Type[card_type.to_upper()]
 	var candidate_cards = CardData.get_cards_in_set_of_type(card_set_name, card_type)
 	if candidate_cards.size() == 0:
 		print("No cards found for set " + card_set_name + " and type " + card_type)
@@ -115,13 +154,17 @@ func generate_card(card_set_name: String, card_type: String) -> Card:
 					new_card.subtypes.append(subtype.strip())
 			if card.has("image") and card.image:
 				new_card.image = card.image
-			new_card.rarity = card.rarity
+			new_card.rarity = Rarity.get(card.rarity.to_upper())
+			print(card.rarity)
+			print(new_card.rarity)
 			new_card.quality = randi() % Quality.size()
 			if randf() < 0.07:
 				new_card.surface_finish = SurfaceFinish.FOIL
 			else:
 				new_card.surface_finish = SurfaceFinish.STANDARD
 			new_card.number = card_key
+			new_card.source = Source.get(card.source.to_upper())
+			print("New Card Source: " + str(new_card.source))
 			GameManager.player_collection.add_card_to_collection(new_card)
 			print(GameManager.player_collection.get_player_collection())
 			#print(GameManager.player_collection.getPlayerCollection())
@@ -139,3 +182,18 @@ func get_total_weight_of_candidates(candidate_cards: Dictionary) -> int:
 	for card_key in candidate_cards:
 		total_weight += candidate_cards[card_key].weight
 	return total_weight
+
+func create_specific_card(card_set_name: String, card_number: int, card_quality: Quality, card_surface_finish: SurfaceFinish, edition: Edition) -> Card:
+	var new_card = Card.new()
+	new_card.card_set_name = card_set_name
+	new_card.number = 0
+	var card_data = CardData.get_card_data(card_set_name, card_number)
+	new_card.name = card_data[name]
+	new_card.quality = card_quality
+	new_card.surface_finish = card_surface_finish
+	new_card.rarity = card_data[rarity]
+	new_card.type = card_data[type]
+	new_card.subtypes = card_data[subtypes]
+	new_card.image = card_data[image]
+	GameManager.player_collection.add_card_to_collection(new_card)
+	return new_card

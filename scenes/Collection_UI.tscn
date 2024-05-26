@@ -4,7 +4,6 @@
 [ext_resource type="Script" path="res://scenes/collection_ui.gd" id="1_uo3ig"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sul4u"]
-
 content_margin_left = 20.0
 content_margin_top = 10.0
 content_margin_right = 20.0
