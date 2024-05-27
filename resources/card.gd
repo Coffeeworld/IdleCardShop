@@ -183,7 +183,7 @@ func get_total_weight_of_candidates(candidate_cards: Dictionary) -> int:
 		total_weight += candidate_cards[card_key].weight
 	return total_weight
 
-func create_specific_card(card_set_name: String, card_id: int, card_quality: Quality, card_surface_finish: SurfaceFinish, edition: Edition) -> Card:
+func create_specific_card(card_set_name: String, card_id: int, card_quality: Quality, card_surface_finish: SurfaceFinish, art_style: Art_Style) -> Card:
 	var new_card = Card.new()
 	new_card.card_set_name = card_set_name
 	new_card.id = card_id
