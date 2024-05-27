@@ -4,12 +4,14 @@ class_name Card
 @export_group("Core Identifiers")
 @export var card_set_name: String = 'Test Set'
 @export var number: int = 0
+@export var card_id: int = 0
 
 @export_group("Variable Instance Attributes")
 @export var quality: Quality = Quality.AVERAGE
 @export var surface_finish: SurfaceFinish = SurfaceFinish.STANDARD
 
 @export_group("Derived Attributes")
+@export var art_style: Art_Style = Art_Style.STANDARD
 @export var source: Source = Source.NEUTRAL
 @export var rarity: Rarity = Rarity.MAGIC
 @export var name: String = 'Card Name'
@@ -20,8 +22,7 @@ class_name Card
 @export var image: CompressedTexture2D = null
 
 @export_group("Source Color")
-@export var source_color : Color
-
+@export var source_color: Color
 
 enum Quality {
 	RAGGED,
@@ -80,9 +81,8 @@ enum Type {
 	QUEST
 }
 
-enum Edition {
+enum Art_Style {
 	STANDARD,
-	FIRST_ED,
 	FULL_ART
 }
 
@@ -103,7 +103,7 @@ enum Source {
 	NEUTRAL
 }
 
-static var SOURCE_COLORS : Array[Color] = [
+static var SOURCE_COLORS: Array[Color] = [
 	Color.LIGHT_CYAN,
 	Color.LIGHT_PINK,
 	Color.FOREST_GREEN,
@@ -121,7 +121,6 @@ static var SOURCE_COLORS : Array[Color] = [
 ]
 
 #TODO functions to get enums as strings and vice versa (use capitalize to make enum Camel)
-
 
 func generate_card(card_set_name: String, card_type: String) -> Card:
 	var new_card = Card.new()
@@ -162,7 +161,8 @@ func generate_card(card_set_name: String, card_type: String) -> Card:
 				new_card.surface_finish = SurfaceFinish.FOIL
 			else:
 				new_card.surface_finish = SurfaceFinish.STANDARD
-			new_card.number = card_key
+			new_card.number = card.card_number
+			new_card.card_id = card_key
 			new_card.source = Source.get(card.source.to_upper())
 			print("New Card Source: " + str(new_card.source))
 			GameManager.player_collection.add_card_to_collection(new_card)
@@ -183,11 +183,12 @@ func get_total_weight_of_candidates(candidate_cards: Dictionary) -> int:
 		total_weight += candidate_cards[card_key].weight
 	return total_weight
 
-func create_specific_card(card_set_name: String, card_number: int, card_quality: Quality, card_surface_finish: SurfaceFinish, edition: Edition) -> Card:
+func create_specific_card(card_set_name: String, card_id: int, card_quality: Quality, card_surface_finish: SurfaceFinish, edition: Edition) -> Card:
 	var new_card = Card.new()
 	new_card.card_set_name = card_set_name
+	new_card.id = card_id
 	new_card.number = 0
-	var card_data = CardData.get_card_data(card_set_name, card_number)
+	var card_data = CardData.get_card_data(card_set_name, card_id)
 	new_card.name = card_data[name]
 	new_card.quality = card_quality
 	new_card.surface_finish = card_surface_finish

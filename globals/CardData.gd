@@ -2,7 +2,7 @@ extends Node
 
 var card_data_file_path = "res://data/Cards.json"
 var complete_card_dictionary = {}
-var list_of_sets : Array[String]
+var list_of_sets: Array[String]
 
 func _ready():
 	update_card_dictionary()
@@ -28,11 +28,11 @@ func update_card_dictionary():
 	else:
 		print("Card data file not found")
 
-func get_card_data(card_set_name: String, card_number: int) -> Dictionary:
+func get_card_data(card_set_name: String, card_id: int) -> Dictionary:
 	var card_data = {}
 	if card_set_name in complete_card_dictionary:
-		if card_number in complete_card_dictionary[card_set_name]:
-			card_data = complete_card_dictionary[card_set_name][card_number]
+		if card_id in complete_card_dictionary[card_set_name]:
+			card_data = complete_card_dictionary[card_set_name][card_id]
 		else:
 			print("Card number not found in card set")
 	else:
@@ -51,11 +51,11 @@ func get_set_size(card_set_name: String) -> int:
 func get_cards_in_set_of_type(card_set_name: String, card_type: String) -> Dictionary:
 	var cards: Dictionary = {}
 	if card_set_name in complete_card_dictionary:
-		for card_number in complete_card_dictionary[card_set_name]:
-			var card_data = complete_card_dictionary[card_set_name][card_number]
+		for card_id in complete_card_dictionary[card_set_name]:
+			var card_data = complete_card_dictionary[card_set_name][card_id]
 			if card_data != {}:
 				if card_data["card_type"] == card_type:
-					cards[card_number] = card_data
+					cards[card_id] = card_data
 			else:
 				print("Card data is null")
 	return cards
