@@ -198,3 +198,39 @@ func create_specific_card(card_set_name: String, card_id: int, card_quality: Qua
 	new_card.image = card_data[image]
 	GameManager.player_collection.add_card_to_collection(new_card)
 	return new_card
+
+func generate_random_card(card_set_name: String) -> Card:
+	var new_card = Card.new()
+	new_card.card_set_name = card_set_name
+	new_card.quality = randi() % Quality.size()
+	if randf() < 0.07:
+		new_card.surface_finish = SurfaceFinish.FOIL
+	else:
+		new_card.surface_finish = SurfaceFinish.STANDARD
+	new_card.rarity = Rarity.get(card.rarity.to_upper())
+	new_card.type = Type[card_type.to_upper()]
+	new_card.subtypes = []
+	new_card.name = "Random Card"
+	new_card.flavor_text = "Random Flavor Text"
+	new_card.text = "Random Card Text"
+	new_card.image = null
+	GameManager.player_collection.add_card_to_collection(new_card)
+	return new_card
+
+func generate_card_by_rarity(card_set_name: String, rarity: Rarity) -> Card:
+	var new_card = Card.new()
+	new_card.card_set_name = card_set_name
+	new_card.quality = randi() % Quality.size()
+	if randf() < 0.07:
+		new_card.surface_finish = SurfaceFinish.FOIL
+	else:
+		new_card.surface_finish = SurfaceFinish.STANDARD
+	new_card.rarity = rarity
+	new_card.type = Type[card_type.to_upper()]
+	new_card.subtypes = []
+	new_card.name = "Random Card"
+	new_card.flavor_text = "Random Flavor Text"
+	new_card.text = "Random Card Text"
+	new_card.image = null
+	GameManager.player_collection.add_card_to_collection(new_card)
+	return new_card
