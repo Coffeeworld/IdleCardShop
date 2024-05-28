@@ -14,12 +14,12 @@ class_name Card
 @export var art_style: Art_Style = Art_Style.STANDARD
 @export var source: Source = Source.NEUTRAL
 @export var rarity: Rarity = Rarity.MAGIC
-@export var name: String = 'Card Name'
-@export var flavor_text: String = 'Flavor Text'
-@export var text: String = 'Card Text'
+@export var name: String = ''
+@export var flavor_text: String = ''
+@export var text: String = ''
 @export var type: Type = Type.CHARACTER
-@export var subtypes: Array[String] = []
-@export var image: CompressedTexture2D = null
+@export var keywords: String
+@export var art: CompressedTexture2D = null
 
 @export_group("Source Color")
 @export var source_color: Color
@@ -122,7 +122,7 @@ static var SOURCE_COLORS: Array[Color] = [
 
 #TODO functions to get enums as strings and vice versa (use capitalize to make enum Camel)
 
-func generate_card(card_set_name: String, card_type: String) -> Card:
+func generate_card_by_set_and_type(card_set_name: String, card_type: String) -> Card:
 	var new_card = Card.new()
 	new_card.card_set_name = card_set_name
 	new_card.type = Type[card_type.to_upper()]
@@ -130,45 +130,30 @@ func generate_card(card_set_name: String, card_type: String) -> Card:
 	if candidate_cards.size() == 0:
 		print("No cards found for set " + card_set_name + " and type " + card_type)
 		return null
-	var total_weight = get_total_weight_of_candidates(candidate_cards)
-	var random_number = randi() % total_weight
-	print(random_number)
-	print("The following cards are candidates for generation:")
-	var cumulative_weight = 0
-	for card_key in candidate_cards:
-		var card = candidate_cards[card_key]
-		print("Current card: " + card.card_name)
-		cumulative_weight += card.weight
-		print("cumulative weight: " + str(cumulative_weight))
-		if random_number <= cumulative_weight:
-			print("Selected card: " + card.card_name)
-			print(card)
-			new_card.name = card.card_name
-			new_card.flavor_text = card.flavor
-			if card.has("text") and card.text:
-				new_card.text = card.text
-			if card.has("subtypes") and card.subtypes:
-				print(card.subtypes)
-				for subtype in new_card.subtypes:
-					new_card.subtypes.append(subtype.strip())
-			if card.has("image") and card.image:
-				new_card.image = card.image
-			new_card.rarity = Rarity.get(card.rarity.to_upper())
-			print(card.rarity)
-			print(new_card.rarity)
-			new_card.quality = randi() % Quality.size()
-			if randf() < 0.07:
-				new_card.surface_finish = SurfaceFinish.FOIL
-			else:
-				new_card.surface_finish = SurfaceFinish.STANDARD
-			new_card.number = card.card_number
-			new_card.card_id = card_key
-			new_card.source = Source.get(card.source.to_upper())
-			print("New Card Source: " + str(new_card.source))
-			GameManager.player_collection.add_card_to_collection(new_card)
-			print(GameManager.player_collection.get_player_collection())
-			#print(GameManager.player_collection.getPlayerCollection())
-			break
+	var selected_card = select_card_from_candidates(candidate_cards)
+	print("Selected card: " + selected_card.card_name)
+	new_card.name = selected_card.card_name
+	new_card.flavor_text = selected_card.flavor
+	if selected_card.has("text") and selected_card.text:
+		new_card.text = selected_card.text
+	new_card.keywords = selected_card.keywords
+	if selected_card.has("image") and selected_card.image:
+		new_card.image = selected_card.image
+	new_card.rarity = Rarity.get(selected_card.rarity.to_upper())
+	print(selected_card.rarity)
+	print(new_card.rarity)
+	new_card.quality = randi() % Quality.size()
+	if randf() < 0.07:
+		new_card.surface_finish = SurfaceFinish.FOIL
+	else:
+		new_card.surface_finish = SurfaceFinish.STANDARD
+	new_card.number = selected_card.card_number
+	new_card.card_id = selected_card.card_id
+	new_card.source = Source.get(selected_card.source.to_upper())
+	print("New Card Source: " + str(new_card.source))
+	GameManager.player_collection.add_card_to_collection(new_card)
+	print(GameManager.player_collection.get_player_collection())
+	#print(GameManager.player_collection.getPlayerCollection())
 	print("-------------------")
 	return new_card
 
@@ -194,12 +179,16 @@ func create_specific_card(card_set_name: String, card_id: int, card_quality: Qua
 	new_card.surface_finish = card_surface_finish
 	new_card.rarity = card_data[rarity]
 	new_card.type = card_data[type]
-	new_card.subtypes = card_data[subtypes]
-	new_card.image = card_data[image]
+	new_card.keywords = card_data[keywords]
+	new_card.art = card_data[art]
 	GameManager.player_collection.add_card_to_collection(new_card)
 	return new_card
 
 func generate_random_card(card_set_name: String) -> Card:
+	var candidate_cards = CardData.get_cards_in_set(card_set_name)
+	print(candidate_cards)
+	var selected_card = select_card_from_candidates(candidate_cards)
+	print(selected_card)
 	var new_card = Card.new()
 	new_card.card_set_name = card_set_name
 	new_card.quality = randi() % Quality.size()
@@ -207,13 +196,17 @@ func generate_random_card(card_set_name: String) -> Card:
 		new_card.surface_finish = SurfaceFinish.FOIL
 	else:
 		new_card.surface_finish = SurfaceFinish.STANDARD
-	new_card.rarity = Rarity.get(card.rarity.to_upper())
-	new_card.type = Type[card_type.to_upper()]
-	new_card.subtypes = []
-	new_card.name = "Random Card"
-	new_card.flavor_text = "Random Flavor Text"
-	new_card.text = "Random Card Text"
-	new_card.image = null
+	new_card.rarity = Rarity.get(selected_card.rarity.to_upper())
+	new_card.source = Source.get(selected_card.source.to_upper())
+	new_card.type = selected_card.card_type
+	new_card.keywords = selected_card.keywords
+	new_card.name = selected_card.card_name
+	new_card.flavor_text = selected_card.flavor
+	if selected_card.has("text") and selected_card.text:
+		new_card.text = selected_card.text
+	if selected_card.has("art") and selected_card.art:
+		var texture_reference = load(selected_card.art)
+		new_card.art = texture_reference
 	GameManager.player_collection.add_card_to_collection(new_card)
 	return new_card
 
@@ -226,7 +219,7 @@ func generate_card_by_rarity(card_set_name: String, rarity: Rarity) -> Card:
 	else:
 		new_card.surface_finish = SurfaceFinish.STANDARD
 	new_card.rarity = rarity
-	new_card.type = Type[card_type.to_upper()]
+	#new_card.type = card.type
 	new_card.subtypes = []
 	new_card.name = "Random Card"
 	new_card.flavor_text = "Random Flavor Text"
@@ -234,3 +227,22 @@ func generate_card_by_rarity(card_set_name: String, rarity: Rarity) -> Card:
 	new_card.image = null
 	GameManager.player_collection.add_card_to_collection(new_card)
 	return new_card
+
+func select_card_from_candidates(candidate_cards: Dictionary) -> Dictionary:
+	var total_weight = get_total_weight_of_candidates(candidate_cards)
+	print('Total Candidate Card Weight: ' + str(total_weight))
+	var random_number = randi() % total_weight
+	print(random_number)
+	print("The following cards are candidates for generation:")
+	var cumulative_weight = 0
+	for card_key in candidate_cards:
+		var card = candidate_cards[card_key]
+		print("Current card: " + card.card_name)
+		cumulative_weight += card.weight
+		print("cumulative weight: " + str(cumulative_weight))
+		if random_number <= cumulative_weight:
+			print("Selected card: " + card.card_name)
+			print(card)
+			return card
+	print("-------------------")
+	return {}

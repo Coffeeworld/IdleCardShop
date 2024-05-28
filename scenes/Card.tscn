@@ -24,7 +24,7 @@ colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_m0vax"]
 noise_type = 3
-seed = 4
+seed = 21
 frequency = 0.0194
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dm6i1"]
@@ -33,7 +33,7 @@ noise = SubResource("FastNoiseLite_m0vax")
 
 [node name="Card" type="Control"]
 z_index = 100
-custom_minimum_size = Vector2(250, 350)
+custom_minimum_size = Vector2(125, 175)
 layout_mode = 3
 anchor_right = 0.217
 anchor_bottom = 0.54
@@ -182,6 +182,7 @@ Ipsum Lorem
 Ipsum Lorem"
 
 [node name="Art" type="TextureRect" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.04

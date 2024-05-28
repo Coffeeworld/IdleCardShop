@@ -59,3 +59,14 @@ func get_cards_in_set_of_type(card_set_name: String, card_type: String) -> Dicti
 			else:
 				print("Card data is null")
 	return cards
+
+func get_cards_in_set(card_set_name: String) -> Dictionary:
+	var cards: Dictionary = {}
+	if card_set_name in complete_card_dictionary:
+		for card_id in complete_card_dictionary[card_set_name]:
+			var card_data = complete_card_dictionary[card_set_name][card_id]
+			if card_data != {}:
+				cards[card_id] = card_data
+			else:
+				print("Card data is null")
+	return cards
