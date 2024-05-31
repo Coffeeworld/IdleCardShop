@@ -9,7 +9,8 @@
       "weight": 1000,
       "art_style": "STANDARD",
       "keywords": "Source, Celestial",
-      "flavor": "Lorem ipsum"
+      "flavor": "Lorem ipsum",
+      "art": "res://assets/card_art/celestial.jpg"
     },
     "2": {
       "card_number": 2,
@@ -31,7 +32,8 @@
       "weight": 1000,
       "art_style": "STANDARD",
       "keywords": "Source, Life",
-      "flavor": "Lorem ipsum"
+      "flavor": "Lorem ipsum",
+      "art": "res://assets/card_art/life.jpg"
     },
     "4": {
       "card_number": 4,
@@ -42,7 +44,8 @@
       "weight": 1000,
       "art_style": "STANDARD",
       "keywords": "Source, Light",
-      "flavor": "Lorem ipsum"
+      "flavor": "Lorem ipsum",
+      "art": "res://assets/card_art/light.jpg"
     },
     "5": {
       "card_number": 5,
@@ -53,7 +56,8 @@
       "weight": 1000,
       "art_style": "STANDARD",
       "keywords": "Source, Harmony",
-      "flavor": "Lorem ipsum"
+      "flavor": "Lorem ipsum",
+      "art": "res://assets/card_art/harmony.jpg"
     },
     "6": {
       "card_number": 6,
@@ -152,7 +156,8 @@
       "weight": 20,
       "art_style": "FULL_ART",
       "keywords": "Source, Celestial",
-      "flavor": "Lorem ipsum"
+      "flavor": "Lorem ipsum",
+      "art": "res://assets/card_art/celestial-full.jpg"
     },
     "15": {
       "card_number": 2,
@@ -163,7 +168,8 @@
       "weight": 20,
       "art_style": "FULL_ART",
       "keywords": "Source, Beginning",
-      "flavor": "Lorem ipsum"
+      "flavor": "Lorem ipsum",
+      "art": "res://assets/card_art/beginning-full.jpg"
     },
     "16": {
       "card_number": 3,
@@ -174,7 +180,8 @@
       "weight": 20,
       "art_style": "FULL_ART",
       "keywords": "Source, Life",
-      "flavor": "Lorem ipsum"
+      "flavor": "Lorem ipsum",
+      "art": "res://assets/card_art/life-full.jpg"
     },
     "17": {
       "card_number": 4,
@@ -185,7 +192,8 @@
       "weight": 20,
       "art_style": "FULL_ART",
       "keywords": "Source, Light",
-      "flavor": "Lorem ipsum"
+      "flavor": "Lorem ipsum",
+      "art": "res://assets/card_art/light-full.jpg"
     },
     "18": {
       "card_number": 5,
@@ -196,7 +204,8 @@
       "weight": 20,
       "art_style": "FULL_ART",
       "keywords": "Source, Harmony",
-      "flavor": "Lorem ipsum"
+      "flavor": "Lorem ipsum",
+      "art": "res://assets/card_art/harmony-full.jpg"
     },
     "19": {
       "card_number": 6,
