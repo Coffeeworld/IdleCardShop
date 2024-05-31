@@ -74,6 +74,15 @@ text = "Add Pack to Collection"
 layout_mode = 2
 text = "Add Box to Collection"
 
+[node name="SpecifiedCard" type="TextEdit" parent="MarginContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "1"
+
+[node name="AddSpecificCardToCollection" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Add Specific Card"
+
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
@@ -86,3 +95,4 @@ layout_mode = 2
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/WipeInventory" to="." method="_on_wipe_inventory_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/AddCardToCollection" to="." method="_on_add_cards_to_collection_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/AddSpecificCardToCollection" to="." method="_on_add_specific_card_to_collection_pressed"]

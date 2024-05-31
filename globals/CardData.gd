@@ -28,13 +28,14 @@ func update_card_dictionary():
 	else:
 		print("Card data file not found")
 
-func get_card_data(card_set_name: String, card_id: int) -> Dictionary:
+func get_card_data(card_set_name: String, card_id: String) -> Dictionary:
 	var card_data = {}
 	if card_set_name in complete_card_dictionary:
+		print(card_id)
 		if card_id in complete_card_dictionary[card_set_name]:
 			card_data = complete_card_dictionary[card_set_name][card_id]
 		else:
-			print("Card number not found in card set")
+			print("Card id not found in card set")
 	else:
 		print("Card set not found")
 	return card_data

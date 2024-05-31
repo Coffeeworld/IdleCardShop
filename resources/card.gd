@@ -168,7 +168,7 @@ func get_total_weight_of_candidates(candidate_cards: Dictionary) -> int:
 		total_weight += candidate_cards[card_key].weight
 	return total_weight
 
-func create_specific_card(card_set_name: String, card_id: int, card_quality: Quality, card_surface_finish: SurfaceFinish, art_style: Art_Style) -> Card:
+func create_specific_card(card_set_name: String, card_id: String, card_quality: Quality, card_surface_finish: SurfaceFinish, art_style: Art_Style) -> Card:
 	var new_card = Card.new()
 	new_card.card_set_name = card_set_name
 	new_card.id = card_id
@@ -186,9 +186,9 @@ func create_specific_card(card_set_name: String, card_id: int, card_quality: Qua
 
 func generate_random_card(card_set_name: String) -> Card:
 	var candidate_cards = CardData.get_cards_in_set(card_set_name)
-	print(candidate_cards)
+	#print(candidate_cards)
 	var selected_card = select_card_from_candidates(candidate_cards)
-	print(selected_card)
+	#print(selected_card)
 	var new_card = Card.new()
 	new_card.card_set_name = card_set_name
 	new_card.quality = randi() % Quality.size()
@@ -198,6 +198,8 @@ func generate_random_card(card_set_name: String) -> Card:
 		new_card.surface_finish = SurfaceFinish.STANDARD
 	new_card.rarity = Rarity.get(selected_card.rarity.to_upper())
 	new_card.source = Source.get(selected_card.source.to_upper())
+	new_card.art_style = Art_Style.get(selected_card.art_style.to_upper())
+	print("New Card Art Style: " + str(new_card.art_style))
 	new_card.type = selected_card.card_type
 	new_card.keywords = selected_card.keywords
 	new_card.name = selected_card.card_name
@@ -206,6 +208,33 @@ func generate_random_card(card_set_name: String) -> Card:
 		new_card.text = selected_card.text
 	if selected_card.has("art") and selected_card.art:
 		var texture_reference = load(selected_card.art)
+		new_card.art = texture_reference
+	GameManager.player_collection.add_card_to_collection(new_card)
+	return new_card
+
+func generate_specific_card(card_set_name: String, card_id: String) -> Card:
+	var new_card = Card.new()
+	var card_data = CardData.get_card_data(card_set_name, card_id)
+	print(card_data)
+	print(card_data['card_name'])
+	new_card.card_set_name = card_set_name
+	new_card.quality = randi() % Quality.size()
+	if randf() < 0.07:
+		new_card.surface_finish = SurfaceFinish.FOIL
+	else:
+		new_card.surface_finish = SurfaceFinish.STANDARD
+	new_card.rarity = Rarity.get(card_data.rarity.to_upper())
+	new_card.source = Source.get(card_data.source.to_upper())
+	new_card.art_style = Art_Style.get(card_data.art_style.to_upper())
+	print("New Card Art Style: " + str(new_card.art_style))
+	new_card.type = card_data.card_type
+	new_card.keywords = card_data.keywords
+	new_card.name = card_data.card_name
+	new_card.flavor_text = card_data.flavor
+	if card_data.has("text") and card_data.text:
+		new_card.text = card_data.text
+	if card_data.has("art") and card_data.art:
+		var texture_reference = load(card_data.art)
 		new_card.art = texture_reference
 	GameManager.player_collection.add_card_to_collection(new_card)
 	return new_card
@@ -233,16 +262,17 @@ func select_card_from_candidates(candidate_cards: Dictionary) -> Dictionary:
 	print('Total Candidate Card Weight: ' + str(total_weight))
 	var random_number = randi() % total_weight
 	print(random_number)
-	print("The following cards are candidates for generation:")
+	#print("The following cards are candidates for generation:")
 	var cumulative_weight = 0
 	for card_key in candidate_cards:
 		var card = candidate_cards[card_key]
-		print("Current card: " + card.card_name)
+		#print("Current card: " + card.card_name)
 		cumulative_weight += card.weight
-		print("cumulative weight: " + str(cumulative_weight))
+		#print("cumulative weight: " + str(cumulative_weight))
 		if random_number <= cumulative_weight:
 			print("Selected card: " + card.card_name)
 			print(card)
+			print("Card Key: " + card_key)
 			return card
 	print("-------------------")
 	return {}

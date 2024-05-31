@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/card_ui.gd" id="1_0c6js"]
 [ext_resource type="Theme" uid="uid://d0kvedaf1dlpf" path="res://themes/default.tres" id="1_n7gm0"]
-[ext_resource type="Texture2D" uid="uid://b6u6to51bkquj" path="res://assets/card_art/shadowcat-fae.jpg" id="3_5uup3"]
+[ext_resource type="Texture2D" uid="uid://cph0vdjwj56yu" path="res://assets/card_art/life.jpg" id="3_xos21"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mvkka"]
 bg_color = Color(0, 0, 0, 1)
@@ -189,7 +189,7 @@ anchor_left = 0.04
 anchor_top = 0.1
 anchor_right = 0.96
 anchor_bottom = 0.557
-offset_right = -1.52588e-05
-offset_bottom = 0.0499878
-texture = ExtResource("3_5uup3")
-expand_mode = 2
+offset_right = 3.46613e-05
+offset_bottom = 0.0500065
+texture = ExtResource("3_xos21")
+expand_mode = 1
