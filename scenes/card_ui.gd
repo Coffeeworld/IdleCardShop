@@ -22,3 +22,5 @@ func update_card():
 		%Flavor.hide()
 		%Text.hide()
 		%Art.anchor_bottom = 0.9333
+	if card.surface_finish == 1:
+		%Foil.show()

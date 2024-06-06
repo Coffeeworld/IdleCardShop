@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0uonknk7q345"]
+[gd_scene load_steps=11 format=3 uid="uid://d0uonknk7q345"]
 
 [ext_resource type="Script" path="res://scenes/card_ui.gd" id="1_0c6js"]
 [ext_resource type="Theme" uid="uid://d0kvedaf1dlpf" path="res://themes/default.tres" id="1_n7gm0"]
+[ext_resource type="Shader" path="res://shaders/foil.gdshader" id="3_f26a1"]
 [ext_resource type="Texture2D" uid="uid://cph0vdjwj56yu" path="res://assets/card_art/life.jpg" id="3_xos21"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mvkka"]
@@ -30,6 +31,11 @@ frequency = 0.0194
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dm6i1"]
 color_ramp = SubResource("Gradient_dxqgn")
 noise = SubResource("FastNoiseLite_m0vax")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j1vio"]
+shader = ExtResource("3_f26a1")
+shader_parameter/u_resolution = null
+shader_parameter/u_mouse = null
 
 [node name="Card" type="Control"]
 z_index = 100
@@ -193,3 +199,14 @@ offset_right = 3.46613e-05
 offset_bottom = 0.0500065
 texture = ExtResource("3_xos21")
 expand_mode = 1
+
+[node name="Foil" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_j1vio")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
