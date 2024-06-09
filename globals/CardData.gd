@@ -6,14 +6,14 @@ var list_of_sets: Array[String]
 
 func _ready():
 	update_card_dictionary()
-	print("Complete Card Dictionary")
-	print("----------------------")
+	#print("Complete Card Dictionary")
+	#print("----------------------")
 	for collection_name in complete_card_dictionary:
 		list_of_sets.append(collection_name)
-		for card_number in complete_card_dictionary[collection_name]:
-			print(collection_name, ": ", card_number)
-	print("----------------------")
-	print("End of Complete Card Dictionary")
+		#for card_number in complete_card_dictionary[collection_name]:
+			#print(collection_name, ": ", card_number)
+	#print("----------------------")
+	#print("End of Complete Card Dictionary")
 	print("List of sets: " + str(list_of_sets))
 
 func update_card_dictionary():

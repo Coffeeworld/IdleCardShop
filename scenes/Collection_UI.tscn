@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://q42equjtngm5"]
+[gd_scene load_steps=5 format=3 uid="uid://q42equjtngm5"]
 
 [ext_resource type="Theme" uid="uid://d0kvedaf1dlpf" path="res://themes/default.tres" id="1_21x7y"]
 [ext_resource type="Script" path="res://scenes/collection_ui.gd" id="1_uo3ig"]
+[ext_resource type="PackedScene" uid="uid://dkljjfofwulko" path="res://scenes/CollectionGrid.tscn" id="3_0hnt6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sul4u"]
 content_margin_left = 20.0
@@ -51,19 +52,15 @@ text = "Player Collection"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CardCollection" type="GridContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 10
-columns = 8
-
-[node name="PackCollection" type="GridContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
-unique_name_in_owner = true
-visible = false
+[node name="CardCollection" parent="PanelContainer/VBoxContainer/TabContainer" instance=ExtResource("3_0hnt6")]
 layout_mode = 2
 
-[node name="BoxCollection" type="GridContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
-unique_name_in_owner = true
+[node name="PackCollection" parent="PanelContainer/VBoxContainer/TabContainer" instance=ExtResource("3_0hnt6")]
 visible = false
 layout_mode = 2
+item_type = 1
+
+[node name="BoxCollection" parent="PanelContainer/VBoxContainer/TabContainer" instance=ExtResource("3_0hnt6")]
+visible = false
+layout_mode = 2
+item_type = 2

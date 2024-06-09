@@ -276,3 +276,6 @@ func select_card_from_candidates(candidate_cards: Dictionary) -> Dictionary:
 			return card
 	print("-------------------")
 	return {}
+
+func get_card_number() -> String:
+	return str(number)
