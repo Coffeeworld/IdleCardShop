@@ -147,6 +147,7 @@ func generate_card_by_set_and_type(card_set_name: String, card_type: String) -> 
 		new_card.surface_finish = SurfaceFinish.FOIL
 	else:
 		new_card.surface_finish = SurfaceFinish.STANDARD
+	print("SELECTED CARD NUMBER: " + selected_card.card_number)
 	new_card.number = selected_card.card_number
 	new_card.card_id = selected_card.card_id
 	new_card.source = Source.get(selected_card.source.to_upper())
@@ -190,6 +191,7 @@ func generate_random_card(card_set_name: String) -> Card:
 	var selected_card = select_card_from_candidates(candidate_cards)
 	#print(selected_card)
 	var new_card = Card.new()
+	new_card.card_id = selected_card.card_key
 	new_card.card_set_name = card_set_name
 	new_card.quality = randi() % Quality.size()
 	if randf() < 0.07:
@@ -204,6 +206,7 @@ func generate_random_card(card_set_name: String) -> Card:
 	new_card.keywords = selected_card.keywords
 	new_card.name = selected_card.card_name
 	new_card.flavor_text = selected_card.flavor
+	new_card.number = selected_card.card_number
 	if selected_card.has("text") and selected_card.text:
 		new_card.text = selected_card.text
 	if selected_card.has("art") and selected_card.art:
@@ -273,6 +276,7 @@ func select_card_from_candidates(candidate_cards: Dictionary) -> Dictionary:
 			print("Selected card: " + card.card_name)
 			print(card)
 			print("Card Key: " + card_key)
+			card["card_key"] = card_key
 			return card
 	print("-------------------")
 	return {}

@@ -57,9 +57,11 @@ func _on_collection_selection_item_selected(index):
 				grid.add_child(cardPanel)
 		%ItemGrids.get_child(0).show()
 		for card in GameManager.player_collection.player_card_collection:
+			print(card.name)
 			var card_number = card.get_card_number()
 			print("Card Number: " + card_number)
 			var card_panel = find_card_panel_by_number(card_number)
+			print(card_panel)
 			if card_panel != null:
 				var card_instance = load("res://scenes/Card.tscn").instantiate()
 				card_instance.set_card(card)
@@ -75,5 +77,6 @@ func find_card_panel_by_number(number: String) -> PanelContainer:
 	for grid in %ItemGrids.get_children():
 		for cardPanel in grid.get_children():
 			if cardPanel.get_child(0).get_text() == "Card " + number:
+				print("FOUND CARD PANEL")
 				return cardPanel
 	return null
