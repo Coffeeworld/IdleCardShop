@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkljjfofwulko"]
+
+[ext_resource type="Theme" uid="uid://d0kvedaf1dlpf" path="res://themes/default.tres" id="1_4ugbq"]
+[ext_resource type="Script" path="res://scenes/collection.gd" id="2_62igq"]
+[ext_resource type="Texture2D" uid="uid://w0uuowrmlvdq" path="res://assets/ui_icons/PNG/grey_sliderLeft.png" id="3_pr6f5"]
+[ext_resource type="Texture2D" uid="uid://ka8u44vnj52k" path="res://assets/ui_icons/PNG/grey_sliderRight.png" id="4_lraqb"]
+
+[node name="Collection" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_4ugbq")
+script = ExtResource("2_62igq")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CollectionSelection" type="OptionButton" parent="HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="VariationSelection" type="OptionButton" parent="HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+item_count = 2
+popup/item_0/text = "Standard"
+popup/item_0/id = 0
+popup/item_1/text = "Foil"
+popup/item_1/id = 1
+
+[node name="ShowMissingCards" type="CheckButton" parent="HBoxContainer2"]
+layout_mode = 2
+text = "Show Missing Cards"
+
+[node name="ItemGrids" type="CenterContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PreviousPage" type="TextureButton" parent="HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+texture_normal = ExtResource("3_pr6f5")
+
+[node name="NextPage" type="TextureButton" parent="HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+texture_normal = ExtResource("4_lraqb")
+
+[connection signal="item_selected" from="HBoxContainer2/CollectionSelection" to="." method="_on_collection_selection_item_selected"]
+[connection signal="item_selected" from="HBoxContainer2/VariationSelection" to="." method="_on_variation_selection_item_selected"]
+[connection signal="toggled" from="HBoxContainer2/ShowMissingCards" to="." method="_on_show_missing_cards_toggled"]
+[connection signal="pressed" from="HBoxContainer/PreviousPage" to="." method="_on_previous_page_pressed"]
+[connection signal="pressed" from="HBoxContainer/NextPage" to="." method="_on_next_page_pressed"]

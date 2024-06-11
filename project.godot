@@ -22,6 +22,12 @@ SaveManager="*res://globals/SaveManager.gd"
 SignalManager="*res://globals/SignalManager.gd"
 GameManager="*res://globals/GameManager.gd"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=2
+
 [input]
 
 god_panel={

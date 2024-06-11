@@ -2,18 +2,18 @@ extends Node
 
 var card_data_file_path = "res://data/Cards.json"
 var complete_card_dictionary = {}
-var list_of_sets : Array[String]
+var list_of_sets: Array[String]
 
 func _ready():
 	update_card_dictionary()
-	print("Complete Card Dictionary")
-	print("----------------------")
+	#print("Complete Card Dictionary")
+	#print("----------------------")
 	for collection_name in complete_card_dictionary:
 		list_of_sets.append(collection_name)
-		for card_number in complete_card_dictionary[collection_name]:
-			print(collection_name, ": ", card_number)
-	print("----------------------")
-	print("End of Complete Card Dictionary")
+		#for card_number in complete_card_dictionary[collection_name]:
+			#print(collection_name, ": ", card_number)
+	#print("----------------------")
+	#print("End of Complete Card Dictionary")
 	print("List of sets: " + str(list_of_sets))
 
 func update_card_dictionary():
@@ -28,13 +28,14 @@ func update_card_dictionary():
 	else:
 		print("Card data file not found")
 
-func get_card_data(card_set_name: String, card_number: int) -> Dictionary:
+func get_card_data(card_set_name: String, card_id: String) -> Dictionary:
 	var card_data = {}
 	if card_set_name in complete_card_dictionary:
-		if card_number in complete_card_dictionary[card_set_name]:
-			card_data = complete_card_dictionary[card_set_name][card_number]
+		print(card_id)
+		if card_id in complete_card_dictionary[card_set_name]:
+			card_data = complete_card_dictionary[card_set_name][card_id]
 		else:
-			print("Card number not found in card set")
+			print("Card id not found in card set")
 	else:
 		print("Card set not found")
 	return card_data
@@ -51,11 +52,22 @@ func get_set_size(card_set_name: String) -> int:
 func get_cards_in_set_of_type(card_set_name: String, card_type: String) -> Dictionary:
 	var cards: Dictionary = {}
 	if card_set_name in complete_card_dictionary:
-		for card_number in complete_card_dictionary[card_set_name]:
-			var card_data = complete_card_dictionary[card_set_name][card_number]
+		for card_id in complete_card_dictionary[card_set_name]:
+			var card_data = complete_card_dictionary[card_set_name][card_id]
 			if card_data != {}:
 				if card_data["card_type"] == card_type:
-					cards[card_number] = card_data
+					cards[card_id] = card_data
+			else:
+				print("Card data is null")
+	return cards
+
+func get_cards_in_set(card_set_name: String) -> Dictionary:
+	var cards: Dictionary = {}
+	if card_set_name in complete_card_dictionary:
+		for card_id in complete_card_dictionary[card_set_name]:
+			var card_data = complete_card_dictionary[card_set_name][card_id]
+			if card_data != {}:
+				cards[card_id] = card_data
 			else:
 				print("Card data is null")
 	return cards

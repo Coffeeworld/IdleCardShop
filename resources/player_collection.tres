@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_dm0nn")
+game_name = ""
 player_card_collection = []
 player_pack_collection = []
 player_box_collection = []

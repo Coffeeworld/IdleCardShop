@@ -17,5 +17,5 @@ func load_or_create_player_collection(game_name: String) -> PlayerCollection:
 		player_collection = PlayerCollection.new()
 		player_collection.game_name = game_name
 		ResourceSaver.save(player_collection, save_file_path + game_file_name + ".tres")
-	print(player_collection.get_player_collection())
+	#print(player_collection.get_player_collection())
 	return player_collection

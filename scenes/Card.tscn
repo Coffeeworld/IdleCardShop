@@ -1,15 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0uonknk7q345"]
+[gd_scene load_steps=11 format=3 uid="uid://d0uonknk7q345"]
 
 [ext_resource type="Script" path="res://scenes/card_ui.gd" id="1_0c6js"]
 [ext_resource type="Theme" uid="uid://d0kvedaf1dlpf" path="res://themes/default.tres" id="1_n7gm0"]
-[ext_resource type="Texture2D" uid="uid://b6u6to51bkquj" path="res://assets/card_art/shadowcat-fae.jpg" id="3_5uup3"]
+[ext_resource type="Shader" path="res://shaders/foil.gdshader" id="3_f26a1"]
+[ext_resource type="Texture2D" uid="uid://cph0vdjwj56yu" path="res://assets/card_art/life.jpg" id="3_xos21"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mvkka"]
 bg_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sqnrt"]
 bg_color = Color(0, 0, 0, 1)
@@ -24,16 +25,21 @@ colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_m0vax"]
 noise_type = 3
-seed = 4
+seed = 21
 frequency = 0.0194
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dm6i1"]
 color_ramp = SubResource("Gradient_dxqgn")
 noise = SubResource("FastNoiseLite_m0vax")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j1vio"]
+shader = ExtResource("3_f26a1")
+shader_parameter/u_resolution = null
+shader_parameter/u_mouse = null
+
 [node name="Card" type="Control"]
 z_index = 100
-custom_minimum_size = Vector2(250, 350)
+custom_minimum_size = Vector2(125, 175)
 layout_mode = 3
 anchor_right = 0.217
 anchor_bottom = 0.54
@@ -182,13 +188,25 @@ Ipsum Lorem
 Ipsum Lorem"
 
 [node name="Art" type="TextureRect" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.04
 anchor_top = 0.1
 anchor_right = 0.96
 anchor_bottom = 0.557
-offset_right = -1.52588e-05
-offset_bottom = 0.0499878
-texture = ExtResource("3_5uup3")
-expand_mode = 2
+offset_right = 3.46613e-05
+offset_bottom = 0.0500065
+texture = ExtResource("3_xos21")
+expand_mode = 1
+
+[node name="Foil" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_j1vio")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
