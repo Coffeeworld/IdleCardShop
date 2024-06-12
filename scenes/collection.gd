@@ -36,7 +36,7 @@ func _on_collection_selection_item_selected(index):
 		var set_name = %CollectionSelection.get_item_text(index)
 		var set_size = CardData.get_set_size(set_name)
 		var num_grids = set_size / 16
-		print("GRID COUNT" + str(num_grids))
+		#print("GRID COUNT" + str(num_grids))
 		for i in range(num_grids):
 			var grid = GridContainer.new()
 			# Configure the grid container as needed
@@ -69,6 +69,18 @@ func _on_collection_selection_item_selected(index):
 				card_panel.get_child(1).set_text(str(card_panel.get_child_count()))
 				card_panel.get_child(1).show()
 				card_panel.get_child(0).hide()
+	elif item_type == 1:
+		var set_name = %CollectionSelection.get_item_text(index)
+		var player_pack_collection = GameManager.player_collection.player_pack_collection
+		var grid = GridContainer.new()
+		grid.set_columns(8)
+		%ItemGrids.add_child(grid)
+		for pack in player_pack_collection:
+			var pack_instance = load("res://scenes/Pack.tscn").instantiate()
+			pack_instance.set_pack(pack)
+			grid.add_child(pack_instance)
+	elif item_type == 2:
+		pass
 
 func _on_variation_selection_item_selected(index):
 	pass # Replace with function body.

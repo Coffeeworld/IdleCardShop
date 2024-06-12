@@ -54,3 +54,8 @@ size_flags_vertical = 3
 
 [node name="CardCollection" parent="PanelContainer/VBoxContainer/TabContainer" instance=ExtResource("3_0hnt6")]
 layout_mode = 2
+
+[node name="PackCollection" parent="PanelContainer/VBoxContainer/TabContainer" instance=ExtResource("3_0hnt6")]
+visible = false
+layout_mode = 2
+item_type = 1
