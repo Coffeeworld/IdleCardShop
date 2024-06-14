@@ -25,6 +25,7 @@ class_name Card
 @export var source_color: Color
 
 enum Quality {
+	RANDOM,
 	RAGGED,
 	POOR,
 	WORN,
@@ -36,11 +37,13 @@ enum Quality {
 }
 
 enum SurfaceFinish {
+	RANDOM,
 	STANDARD,
 	FOIL
 }
 
 enum Rarity {
+	RANDOM,
 	COMMON,
 	UNCOMMON,
 	MAGIC,
@@ -55,6 +58,7 @@ enum Rarity {
 
 static var RARITY_COLORS: Array[Color] = [
 	Color.GRAY,
+	Color.GRAY,
 	Color.LIME_GREEN,
 	Color.BLUE,
 	Color.YELLOW,
@@ -67,6 +71,7 @@ static var RARITY_COLORS: Array[Color] = [
 ]
 
 enum Type {
+	RANDOM,
 	SOURCE,
 	TOKEN,
 	CHARACTER,
@@ -82,11 +87,13 @@ enum Type {
 }
 
 enum Art_Style {
+	RANDOM,
 	STANDARD,
 	FULL_ART
 }
 
 enum Source {
+	RANDOM,
 	CELESTIAL,
 	BEGINNING,
 	LIFE,
@@ -104,6 +111,7 @@ enum Source {
 }
 
 static var SOURCE_COLORS: Array[Color] = [
+	Color.WHITE,
 	Color.LIGHT_CYAN,
 	Color.LIGHT_PINK,
 	Color.FOREST_GREEN,
@@ -120,46 +128,6 @@ static var SOURCE_COLORS: Array[Color] = [
 	Color.SILVER
 ]
 
-#TODO functions to get enums as strings and vice versa (use capitalize to make enum Camel)
-
-func generate_card_by_set_and_type(card_set_name: String, card_type: String) -> Card:
-	var new_card = Card.new()
-	new_card.card_set_name = card_set_name
-	new_card.type = Type[card_type.to_upper()]
-	var candidate_cards = CardData.get_cards_in_set_of_type(card_set_name, card_type)
-	if candidate_cards.size() == 0:
-		print("No cards found for set " + card_set_name + " and type " + card_type)
-		return null
-	var selected_card = select_card_from_candidates(candidate_cards)
-	print("Selected card: " + selected_card.card_name)
-	new_card.name = selected_card.card_name
-	new_card.flavor_text = selected_card.flavor
-	if selected_card.has("text") and selected_card.text:
-		new_card.text = selected_card.text
-	new_card.keywords = selected_card.keywords
-	if selected_card.has("image") and selected_card.image:
-		new_card.image = selected_card.image
-	new_card.rarity = Rarity.get(selected_card.rarity.to_upper())
-	print(selected_card.rarity)
-	print(new_card.rarity)
-	new_card.quality = randi() % Quality.size()
-	if randf() < 0.07:
-		new_card.surface_finish = SurfaceFinish.FOIL
-	else:
-		new_card.surface_finish = SurfaceFinish.STANDARD
-	print("SELECTED CARD NUMBER: " + selected_card.card_number)
-	new_card.number = selected_card.card_number
-	new_card.card_id = selected_card.card_id
-	new_card.source = Source.get(selected_card.source.to_upper())
-	print("New Card Source: " + str(new_card.source))
-	GameManager.player_collection.add_card_to_collection(new_card)
-	print(GameManager.player_collection.get_player_collection())
-	#print(GameManager.player_collection.getPlayerCollection())
-	print("-------------------")
-	return new_card
-
-#TODO: Implement a function to generate a card based on a specific card key
-
 func get_card_type_as_string(card: Card) -> String:
 	return Type.keys()[card.type].capitalize()
 
@@ -169,35 +137,26 @@ func get_total_weight_of_candidates(candidate_cards: Dictionary) -> int:
 		total_weight += candidate_cards[card_key].weight
 	return total_weight
 
-func create_specific_card(card_set_name: String, card_id: String, card_quality: Quality, card_surface_finish: SurfaceFinish, art_style: Art_Style) -> Card:
-	var new_card = Card.new()
-	new_card.card_set_name = card_set_name
-	new_card.id = card_id
-	new_card.number = 0
-	var card_data = CardData.get_card_data(card_set_name, card_id)
-	new_card.name = card_data[name]
-	new_card.quality = card_quality
-	new_card.surface_finish = card_surface_finish
-	new_card.rarity = card_data[rarity]
-	new_card.type = card_data[type]
-	new_card.keywords = card_data[keywords]
-	new_card.art = card_data[art]
-	GameManager.player_collection.add_card_to_collection(new_card)
-	return new_card
-
-func generate_random_card(card_set_name: String) -> Card:
-	var candidate_cards = CardData.get_cards_in_set(card_set_name)
+func generate_card(card_set_name: String, quality:=Quality.RANDOM, surface:=SurfaceFinish.RANDOM, type:=Type.RANDOM, rarity:=Rarity.RANDOM, art_style:=Art_Style.RANDOM, source:=Source.RANDOM) -> Card:
+	var candidate_cards = CardData.get_cards(card_set_name, type, rarity, art_style)
 	#print(candidate_cards)
 	var selected_card = select_card_from_candidates(candidate_cards)
 	#print(selected_card)
 	var new_card = Card.new()
+
 	new_card.card_id = selected_card.card_key
 	new_card.card_set_name = card_set_name
-	new_card.quality = randi() % Quality.size()
-	if randf() < 0.07:
-		new_card.surface_finish = SurfaceFinish.FOIL
+	if quality == Quality.RANDOM:
+		new_card.quality = randi() % Quality.size()
 	else:
-		new_card.surface_finish = SurfaceFinish.STANDARD
+		new_card.quality = quality
+	if surface == SurfaceFinish.RANDOM:
+		if randf() < 0.07:
+			new_card.surface_finish = SurfaceFinish.FOIL
+		else:
+			new_card.surface_finish = SurfaceFinish.STANDARD
+	else:
+		new_card.surface_finish = surface
 	new_card.rarity = Rarity.get(selected_card.rarity.to_upper())
 	new_card.source = Source.get(selected_card.source.to_upper())
 	new_card.art_style = Art_Style.get(selected_card.art_style.to_upper())
@@ -239,24 +198,6 @@ func generate_specific_card(card_set_name: String, card_id: String) -> Card:
 	if card_data.has("art") and card_data.art:
 		var texture_reference = load(card_data.art)
 		new_card.art = texture_reference
-	GameManager.player_collection.add_card_to_collection(new_card)
-	return new_card
-
-func generate_card_by_rarity(card_set_name: String, rarity: Rarity) -> Card:
-	var new_card = Card.new()
-	new_card.card_set_name = card_set_name
-	new_card.quality = randi() % Quality.size()
-	if randf() < 0.07:
-		new_card.surface_finish = SurfaceFinish.FOIL
-	else:
-		new_card.surface_finish = SurfaceFinish.STANDARD
-	new_card.rarity = rarity
-	#new_card.type = card.type
-	new_card.subtypes = []
-	new_card.name = "Random Card"
-	new_card.flavor_text = "Random Flavor Text"
-	new_card.text = "Random Card Text"
-	new_card.image = null
 	GameManager.player_collection.add_card_to_collection(new_card)
 	return new_card
 

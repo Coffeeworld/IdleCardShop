@@ -46,7 +46,7 @@ size_flags_vertical = 4
 theme = ExtResource("1_lrc3t")
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 15
-columns = 6
+columns = 5
 
 [node name="WipeInventory" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -56,16 +56,6 @@ text = "Wipe Inventory"
 layout_mode = 2
 text = "Add Card to Collection"
 
-[node name="AddCardOfTypeToCollection" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-text = "Add Card of Type
-to Collection"
-
-[node name="AddCardOfRarityToCollection2" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-text = "Add Card of Rarity
-to Collection"
-
 [node name="AddPackToCollection" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Add Pack to Collection"
@@ -74,14 +64,54 @@ text = "Add Pack to Collection"
 layout_mode = 2
 text = "Add Box to Collection"
 
-[node name="SpecifiedCard" type="TextEdit" parent="MarginContainer/VBoxContainer/GridContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="SpecifiedCard" type="TextEdit" parent="MarginContainer/VBoxContainer/GridContainer/HBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 2.08165e-12)
 layout_mode = 2
 placeholder_text = "1"
 
-[node name="AddSpecificCardToCollection" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+[node name="AddSpecificCardToCollection" type="Button" parent="MarginContainer/VBoxContainer/GridContainer/HBoxContainer"]
 layout_mode = 2
 text = "Add Specific Card"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="SetName" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Quality" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Surface" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Type" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Rarity" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ArtStyle" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Source" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="GenerateCard" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Generate Card
+With Selections"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -95,4 +125,6 @@ layout_mode = 2
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/WipeInventory" to="." method="_on_wipe_inventory_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/AddCardToCollection" to="." method="_on_add_cards_to_collection_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/AddSpecificCardToCollection" to="." method="_on_add_specific_card_to_collection_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/AddPackToCollection" to="." method="_on_add_pack_to_collection_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/HBoxContainer/AddSpecificCardToCollection" to="." method="_on_add_specific_card_to_collection_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/GenerateCard" to="." method="_on_generate_card_pressed"]

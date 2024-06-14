@@ -17,10 +17,10 @@ func update_card():
 	%RarityColor.set_color(Card.RARITY_COLORS[card.rarity])
 	%Color.set_color(Card.SOURCE_COLORS[card.source])
 	%Art.set_texture(card.art)
-	if card.art_style == 1:
+	if card.art_style == 2:
 		%Type.hide()
 		%Flavor.hide()
 		%Text.hide()
 		%Art.anchor_bottom = 0.9333
-	if card.surface_finish == 1:
+	if card.surface_finish == 2:
 		%Foil.show()

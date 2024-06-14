@@ -31,6 +31,7 @@ func _on_next_page_pressed():
 	if (current_page_index + 1) >= %ItemGrids.get_child_count():
 		%NextPage.hide()
 
+#TODO - Refactor this function to be more modular
 func _on_collection_selection_item_selected(index):
 	if item_type == 0:
 		var set_name = %CollectionSelection.get_item_text(index)

@@ -61,13 +61,70 @@ func get_cards_in_set_of_type(card_set_name: String, card_type: String) -> Dicti
 				print("Card data is null")
 	return cards
 
-func get_cards_in_set(card_set_name: String) -> Dictionary:
+func get_cards(card_set_name: String, type: Card.Type=Card.Type.RANDOM, rarity: Card.Rarity=Card.Rarity.RANDOM, art_style: Card.Art_Style=Card.Art_Style.RANDOM) -> Dictionary:
 	var cards: Dictionary = {}
-	if card_set_name in complete_card_dictionary:
-		for card_id in complete_card_dictionary[card_set_name]:
-			var card_data = complete_card_dictionary[card_set_name][card_id]
-			if card_data != {}:
-				cards[card_id] = card_data
-			else:
-				print("Card data is null")
+	if (type == Card.Type.RANDOM)&&(rarity == Card.Rarity.RANDOM)&&(art_style == Card.Art_Style.RANDOM):
+		if card_set_name in complete_card_dictionary:
+			for card_id in complete_card_dictionary[card_set_name]:
+				var card_data = complete_card_dictionary[card_set_name][card_id]
+				if card_data != {}:
+					cards[card_id] = card_data
+				else:
+					print("Card data is null")
+	elif (type != Card.Type.RANDOM)&&(rarity == Card.Rarity.RANDOM)&&(art_style == Card.Art_Style.RANDOM):
+		if card_set_name in complete_card_dictionary:
+			for card_id in complete_card_dictionary[card_set_name]:
+				var card_data = complete_card_dictionary[card_set_name][card_id]
+				if card_data != {}:
+					if card_data["card_type"] == Card.Type.keys()[type].capitalize():
+						cards[card_id] = card_data
+				else:
+					print("Card data is null")
+	elif (type == Card.Type.RANDOM)&&(rarity != Card.Rarity.RANDOM)&&(art_style == Card.Art_Style.RANDOM):
+		if card_set_name in complete_card_dictionary:
+			for card_id in complete_card_dictionary[card_set_name]:
+				var card_data = complete_card_dictionary[card_set_name][card_id]
+				if card_data != {}:
+					if card_data["rarity"] == Card.Type.keys()[rarity].capitalize():
+						cards[card_id] = card_data
+				else:
+					print("Card data is null")
+	elif (type == Card.Type.RANDOM)&&(rarity == Card.Rarity.RANDOM)&&(art_style != Card.Art_Style.RANDOM):
+		if card_set_name in complete_card_dictionary:
+			for card_id in complete_card_dictionary[card_set_name]:
+				var card_data = complete_card_dictionary[card_set_name][card_id]
+				if card_data != {}:
+					if card_data["art_style"] == Card.Type.keys()[art_style]:
+						cards[card_id] = card_data
+				else:
+					print("Card data is null")
+	elif (type != Card.Type.RANDOM)&&(rarity != Card.Rarity.RANDOM)&&(art_style == Card.Art_Style.RANDOM):
+		if card_set_name in complete_card_dictionary:
+			for card_id in complete_card_dictionary[card_set_name]:
+				var card_data = complete_card_dictionary[card_set_name][card_id]
+				if card_data != {}:
+					if (card_data["card_type"] == Card.Type.keys()[type].capitalize())&&(card_data["rarity"] == Card.Rarity.keys()[rarity].capitalize()):
+						cards[card_id] = card_data
+				else:
+					print("Card data is null")
+	elif (type != Card.Type.RANDOM)&&(rarity == Card.Rarity.RANDOM)&&(art_style != Card.Art_Style.RANDOM):
+		if card_set_name in complete_card_dictionary:
+			for card_id in complete_card_dictionary[card_set_name]:
+				var card_data = complete_card_dictionary[card_set_name][card_id]
+				if card_data != {}:
+					if (card_data["card_type"] == Card.Type.keys()[type].capitalize())&&(card_data["art_style"] == Card.Art_Style.keys()[art_style]):
+						cards[card_id] = card_data
+				else:
+					print("Card data is null")
+	elif (type != Card.Type.RANDOM)&&(rarity != Card.Rarity.RANDOM)&&(art_style != Card.Art_Style.RANDOM):
+		if card_set_name in complete_card_dictionary:
+			for card_id in complete_card_dictionary[card_set_name]:
+				var card_data = complete_card_dictionary[card_set_name][card_id]
+				if card_data != {}:
+					if (card_data["card_type"] == Card.Type.keys()[type].capitalize())&&(card_data["rarity"] == Card.Rarity.keys()[rarity].capitalize())&&(card_data["art_style"] == Card.Art_Style.keys()[art_style]):
+						cards[card_id] = card_data
+				else:
+					print("Card data is null")
+	else:
+		print("Invalid parameters")
 	return cards
