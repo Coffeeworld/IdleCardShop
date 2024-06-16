@@ -1,7 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://dw8o5ff8aht3u"]
+[gd_scene load_steps=11 format=3 uid="uid://dw8o5ff8aht3u"]
 
 [ext_resource type="Script" path="res://tools/god_panel.gd" id="1_1pme7"]
 [ext_resource type="Theme" uid="uid://d0kvedaf1dlpf" path="res://themes/default.tres" id="1_lrc3t"]
+[ext_resource type="Script" path="res://tools/set_list_button.gd" id="3_i7vd4"]
+[ext_resource type="Script" path="res://tools/quality_list_button.gd" id="4_vpp6a"]
+[ext_resource type="Script" path="res://tools/surface_list_button.gd" id="5_m5m38"]
+[ext_resource type="Script" path="res://tools/type_list_button.gd" id="6_qd44t"]
+[ext_resource type="Script" path="res://tools/rarity_list_button.gd" id="7_qn84c"]
+[ext_resource type="Script" path="res://tools/art_style_list_button.gd" id="8_7hn48"]
+[ext_resource type="Script" path="res://tools/source_list_button.gd" id="9_3y0sg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6nfv4"]
 bg_color = Color(0.678431, 0.243137, 0.243137, 0.117647)
@@ -77,41 +84,86 @@ placeholder_text = "1"
 layout_mode = 2
 text = "Add Specific Card"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/GridContainer"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
 layout_mode = 2
+columns = 2
 
-[node name="SetName" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/GridContainer"]
+layout_mode = 2
+text = "Set Name"
+
+[node name="SetName" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("3_i7vd4")
 
-[node name="Quality" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/GridContainer"]
+layout_mode = 2
+text = "Quality"
+
+[node name="Quality" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("4_vpp6a")
 
-[node name="Surface" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer/VBoxContainer"]
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/GridContainer"]
+layout_mode = 2
+text = "Surface"
+
+[node name="Surface" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("5_m5m38")
 
-[node name="Type" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer/VBoxContainer"]
+[node name="Label4" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/GridContainer"]
+layout_mode = 2
+text = "Type"
+
+[node name="Type" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("6_qd44t")
 
-[node name="Rarity" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer/VBoxContainer"]
+[node name="Label5" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/GridContainer"]
+layout_mode = 2
+text = "Rarity"
+
+[node name="Rarity" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("7_qn84c")
 
-[node name="ArtStyle" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer/VBoxContainer"]
+[node name="Label6" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/GridContainer"]
+layout_mode = 2
+text = "Art Style"
+
+[node name="ArtStyle" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("8_7hn48")
 
-[node name="Source" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer/VBoxContainer"]
+[node name="Label7" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/GridContainer"]
+layout_mode = 2
+text = "Source"
+
+[node name="Source" type="OptionButton" parent="MarginContainer/VBoxContainer/GridContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("9_3y0sg")
 
 [node name="GenerateCard" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "Generate Card
 With Selections"
+
+[node name="SaveGame" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Save Game"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -128,3 +180,4 @@ layout_mode = 2
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/AddPackToCollection" to="." method="_on_add_pack_to_collection_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/HBoxContainer/AddSpecificCardToCollection" to="." method="_on_add_specific_card_to_collection_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/GenerateCard" to="." method="_on_generate_card_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/SaveGame" to="." method="_on_save_game_pressed"]

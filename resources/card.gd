@@ -160,7 +160,7 @@ func generate_card(card_set_name: String, quality:=Quality.RANDOM, surface:=Surf
 	new_card.rarity = Rarity.get(selected_card.rarity.to_upper())
 	new_card.source = Source.get(selected_card.source.to_upper())
 	new_card.art_style = Art_Style.get(selected_card.art_style.to_upper())
-	print("New Card Art Style: " + str(new_card.art_style))
+	#print("New Card Art Style: " + str(new_card.art_style))
 	new_card.type = selected_card.card_type
 	new_card.keywords = selected_card.keywords
 	new_card.name = selected_card.card_name
@@ -171,6 +171,7 @@ func generate_card(card_set_name: String, quality:=Quality.RANDOM, surface:=Surf
 	if selected_card.has("art") and selected_card.art:
 		var texture_reference = load(selected_card.art)
 		new_card.art = texture_reference
+	print(new_card.name)
 	GameManager.player_collection.add_card_to_collection(new_card)
 	return new_card
 

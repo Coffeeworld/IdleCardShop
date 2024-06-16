@@ -22,3 +22,6 @@ func _on_add_pack_to_collection_pressed():
 
 func _on_generate_card_pressed():
 	pass # Replace with function body.
+
+func _on_save_game_pressed():
+	GameManager.save_game()
