@@ -7,7 +7,7 @@ class_name Card
 @export var card_id: int = 0
 
 @export_group("Variable Instance Attributes")
-@export var quality: Quality = Quality.AVERAGE
+@export var quality: Enums.Quality = Enums.Quality.AVERAGE
 @export var surface_finish: SurfaceFinish = SurfaceFinish.STANDARD
 
 @export_group("Derived Attributes")
@@ -23,18 +23,6 @@ class_name Card
 
 @export_group("Source Color")
 @export var source_color: Color
-
-enum Quality {
-	RANDOM,
-	RAGGED,
-	POOR,
-	WORN,
-	AVERAGE,
-	GOOD,
-	FINE,
-	EXCELLENT,
-	MINT
-}
 
 enum SurfaceFinish {
 	RANDOM,
@@ -137,7 +125,7 @@ func get_total_weight_of_candidates(candidate_cards: Dictionary) -> int:
 		total_weight += candidate_cards[card_key].weight
 	return total_weight
 
-func generate_card(card_set_name: String, quality:=Quality.RANDOM, surface:=SurfaceFinish.RANDOM, type:=Type.RANDOM, rarity:=Rarity.RANDOM, art_style:=Art_Style.RANDOM, source:=Source.RANDOM) -> Card:
+func generate_card(card_set_name: String, quality:=Enums.Quality.RANDOM, surface:=SurfaceFinish.RANDOM, type:=Type.RANDOM, rarity:=Rarity.RANDOM, art_style:=Art_Style.RANDOM, source:=Source.RANDOM) -> Card:
 	var candidate_cards = CardData.get_cards(card_set_name, type, rarity, art_style)
 	#print(candidate_cards)
 	var selected_card = select_card_from_candidates(candidate_cards)
@@ -146,8 +134,25 @@ func generate_card(card_set_name: String, quality:=Quality.RANDOM, surface:=Surf
 
 	new_card.card_id = selected_card.card_key
 	new_card.card_set_name = card_set_name
-	if quality == Quality.RANDOM:
-		new_card.quality = randi() % Quality.size()
+	
+	if quality == Enums.Quality.RANDOM:
+		var random_quality = randf()
+		if random_quality < 0.08:
+			new_card.quality = Enums.Quality.RAGGED
+		elif random_quality < 0.20:
+			new_card.quality = Enums.Quality.POOR
+		elif random_quality < 0.37:
+			new_card.quality = Enums.Quality.WORN
+		elif random_quality < 0.62:
+			new_card.quality = Enums.Quality.AVERAGE
+		elif random_quality < 0.79:
+			new_card.quality = Enums.Quality.GOOD
+		elif random_quality < 0.91:
+			new_card.quality = Enums.Quality.FINE
+		elif random_quality < 0.99:
+			new_card.quality = Enums.Quality.EXCELLENT
+		else:
+			new_card.quality = Enums.Quality.MINT
 	else:
 		new_card.quality = quality
 	if surface == SurfaceFinish.RANDOM:
@@ -171,7 +176,7 @@ func generate_card(card_set_name: String, quality:=Quality.RANDOM, surface:=Surf
 	if selected_card.has("art") and selected_card.art:
 		var texture_reference = load(selected_card.art)
 		new_card.art = texture_reference
-	print(new_card.name)
+	#print(new_card.name)
 	GameManager.player_collection.add_card_to_collection(new_card)
 	return new_card
 
@@ -181,7 +186,7 @@ func generate_specific_card(card_set_name: String, card_id: String) -> Card:
 	print(card_data)
 	print(card_data['card_name'])
 	new_card.card_set_name = card_set_name
-	new_card.quality = randi() % Quality.size()
+	new_card.quality = randi() % Enums.Quality.size()
 	if randf() < 0.07:
 		new_card.surface_finish = SurfaceFinish.FOIL
 	else:

@@ -21,6 +21,7 @@ CardData="*res://globals/CardData.gd"
 SaveManager="*res://globals/SaveManager.gd"
 SignalManager="*res://globals/SignalManager.gd"
 GameManager="*res://globals/GameManager.gd"
+Enums="*res://globals/ENUMS.gd"
 
 [display]
 
